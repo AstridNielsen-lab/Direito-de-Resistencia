@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Book, Globe, Scale, Info } from 'lucide-react';
+import { Book, Globe, Scale, Info, Bot } from 'lucide-react';
 import ChatBot from './ChatBot';
 
 interface LegalCategoryProps {
@@ -155,7 +155,18 @@ const LegalFoundation: React.FC = () => {
           </LegalCategory>
         </div>
       </div>
-      <ChatBot />
+      <div className="fixed bottom-6 right-24 flex space-x-4">
+        <a
+          href="https://julio-ia-advogado-global-especialista-em-direito-internacional.vercel.app"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="bg-gold-500 text-white p-4 rounded-full shadow-lg hover:bg-gold-600 transition-colors duration-300"
+          aria-label="Consultar IA Especialista em Direito Internacional"
+        >
+          <Bot size={24} />
+        </a>
+        <ChatBot />
+      </div>
     </section>
   );
 };
