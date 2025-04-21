@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Book, Globe, Scale, Info } from 'lucide-react';
+import ChatBot from './ChatBot';
 
 interface LegalCategoryProps {
   icon: React.ReactNode;
@@ -154,6 +155,7 @@ const LegalFoundation: React.FC = () => {
           </LegalCategory>
         </div>
       </div>
+      <ChatBot />
     </section>
   );
 };

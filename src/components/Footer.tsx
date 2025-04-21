@@ -1,5 +1,5 @@
 import React from 'react';
-import { Scale, Heart, ExternalLink } from 'lucide-react';
+import { Scale, Heart, ExternalLink, Phone, Mail, Globe } from 'lucide-react';
 
 const Footer: React.FC = () => {
   return (
@@ -53,6 +53,32 @@ const Footer: React.FC = () => {
           </div>
           
           <div className="text-center text-gray-400 text-sm">
+            <div className="mb-6">
+              <h4 className="text-gold-500 font-medium mb-3">Desenvolvido por</h4>
+              <p className="text-white font-medium">Julio Campos Machado</p>
+              <p className="text-gray-300">Like Look Solutions</p>
+              <div className="flex items-center justify-center space-x-4 mt-2">
+                <a 
+                  href="https://wa.me/5511970603441" 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="text-gray-300 hover:text-gold-400 transition-colors flex items-center"
+                >
+                  <Phone size={16} className="mr-1" />
+                  (11) 97060-3441
+                </a>
+                <a 
+                  href="https://likelook.wixsite.com/solutions" 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="text-gray-300 hover:text-gold-400 transition-colors flex items-center"
+                >
+                  <Globe size={16} className="mr-1" />
+                  Website
+                </a>
+              </div>
+            </div>
+            
             <p className="mb-2">© {new Date().getFullYear()} Direito de Resistência. Todos os direitos reservados.</p>
             <p>
               Site criado com fins educacionais e acadêmicos. O conteúdo apresentado visa estimular 
