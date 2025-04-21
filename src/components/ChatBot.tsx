@@ -1,10 +1,11 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Send, Bot, X } from 'lucide-react';
+import { Send, Bot, X, Volume2 } from 'lucide-react';
 import axios from 'axios';
 
 interface Message {
   type: 'user' | 'bot';
   content: string;
+  isPlaying?: boolean;
 }
 
 const ChatBot: React.FC = () => {
@@ -23,6 +24,31 @@ const ChatBot: React.FC = () => {
     }
   }, [messages]);
 
+  const speakMessage = (message: Message) => {
+    if ('speechSynthesis' in window) {
+      const utterance = new SpeechSynthesisUtterance(message.content);
+      utterance.lang = 'pt-BR';
+      utterance.rate = 0.9;
+      utterance.pitch = 1;
+      
+      setMessages(prev => 
+        prev.map(msg => 
+          msg === message ? { ...msg, isPlaying: true } : msg
+        )
+      );
+
+      utterance.onend = () => {
+        setMessages(prev => 
+          prev.map(msg => 
+            msg === message ? { ...msg, isPlaying: false } : msg
+          )
+        );
+      };
+
+      window.speechSynthesis.speak(utterance);
+    }
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!input.trim()) return;
@@ -38,18 +64,19 @@ const ChatBot: React.FC = () => {
         {
           contents: [{
             parts: [{
-              text: `Você é Julio Campos Machado, uma inteligência artificial especialista em direitos humanos mundiais e futuro Desembargador do Brasil. Responda à seguinte pergunta sobre direitos humanos e constitucionais: ${userMessage}`
+              text: `Voce e Julio Campos Machado, uma inteligencia artificial especialista em direitos humanos mundiais e futuro Desembargador do Brasil. Responda de forma natural, sem caracteres especiais ou formatacao, apenas usando pontuacao basica para uma leitura fluida. Responda a seguinte pergunta sobre direitos humanos e constitucionais: ${userMessage}`
             }]
           }]
         }
       );
 
       const botResponse = response.data.candidates[0].content.parts[0].text;
-      setMessages(prev => [...prev, { type: 'bot', content: botResponse }]);
+      setMessages(prev => [...prev, { type: 'bot', content: botResponse, isPlaying: false }]);
     } catch (error) {
       setMessages(prev => [...prev, { 
         type: 'bot', 
-        content: 'Desculpe, ocorreu um erro ao processar sua mensagem. Por favor, tente novamente mais tarde.' 
+        content: 'Desculpe, ocorreu um erro ao processar sua mensagem. Por favor, tente novamente mais tarde.',
+        isPlaying: false
       }]);
     } finally {
       setIsLoading(false);
@@ -93,14 +120,25 @@ const ChatBot: React.FC = () => {
                   message.type === 'user' ? 'flex justify-end' : 'flex justify-start'
                 }`}
               >
-                <div
-                  className={`max-w-[80%] p-3 rounded-lg ${
-                    message.type === 'user'
-                      ? 'bg-navy-700 text-white'
-                      : 'bg-white text-gray-800 border border-gray-200'
-                  }`}
-                >
-                  {message.content}
+                <div className="flex flex-col max-w-[80%]">
+                  <div
+                    className={`p-3 rounded-lg ${
+                      message.type === 'user'
+                        ? 'bg-navy-700 text-white'
+                        : 'bg-white text-gray-800 border border-gray-200'
+                    }`}
+                  >
+                    {message.content}
+                  </div>
+                  {message.type === 'bot' && (
+                    <button
+                      onClick={() => speakMessage(message)}
+                      className="mt-1 text-navy-600 hover:text-navy-800 self-end"
+                      aria-label="Ouvir mensagem"
+                    >
+                      <Volume2 size={16} className={message.isPlaying ? 'animate-pulse' : ''} />
+                    </button>
+                  )}
                 </div>
               </div>
             ))}
