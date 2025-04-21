@@ -1,5 +1,5 @@
 import React from 'react';
-import { Scale, Heart, ExternalLink, Phone, Mail, Globe } from 'lucide-react';
+import { Scale, Heart, ExternalLink, Phone, Mail, Globe, Linkedin, Facebook, Twitter, Instagram } from 'lucide-react';
 
 const Footer: React.FC = () => {
   return (
@@ -57,7 +57,7 @@ const Footer: React.FC = () => {
               <h4 className="text-gold-500 font-medium mb-3">Desenvolvido por</h4>
               <p className="text-white font-medium">Julio Campos Machado</p>
               <p className="text-gray-300">Like Look Solutions</p>
-              <div className="flex items-center justify-center space-x-4 mt-2">
+              <div className="flex items-center justify-center space-x-4 mt-4">
                 <a 
                   href="https://wa.me/5511970603441" 
                   target="_blank" 
@@ -75,6 +75,40 @@ const Footer: React.FC = () => {
                 >
                   <Globe size={16} className="mr-1" />
                   Website
+                </a>
+              </div>
+              <div className="flex justify-center space-x-6 mt-4">
+                <a 
+                  href="https://www.linkedin.com/in/juliocamposmachado" 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="text-gray-300 hover:text-gold-400 transition-colors"
+                >
+                  <Linkedin size={20} />
+                </a>
+                <a 
+                  href="https://www.facebook.com/likelooksolutions" 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="text-gray-300 hover:text-gold-400 transition-colors"
+                >
+                  <Facebook size={20} />
+                </a>
+                <a 
+                  href="https://x.com/DevJulioMachado" 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="text-gray-300 hover:text-gold-400 transition-colors"
+                >
+                  <Twitter size={20} />
+                </a>
+                <a 
+                  href="https://www.instagram.com/radiotatuapefm" 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="text-gray-300 hover:text-gold-400 transition-colors"
+                >
+                  <Instagram size={20} />
                 </a>
               </div>
             </div>
